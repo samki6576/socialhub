@@ -1,4 +1,11 @@
 ﻿require('dotenv').config();
+
+// 🔐 JWT Secret – use environment variable or fallback (for development only)
+if (!process.env.JWT_SECRET) {
+  console.warn('⚠️  JWT_SECRET not set in environment. Using default secret (INSECURE for production).');
+  process.env.JWT_SECRET = 'fallback_secret_do_not_use_in_production';
+}
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
