@@ -7,18 +7,6 @@ Here's a **complete, professional README** for your **SocialHub** project – re
 ```markdown
 # 🌐 SocialHub – Mini Social Media Platform
 
-<div align="center">
-
-![SocialHub Logo](https://placehold.co/600x200/6C63FF/FFFFFF?text=SocialHub)
-
-**A full‑stack social media platform built for the CodeAlpha Internship**
-
-[![Live Demo](https://img.shields.io/badge/Live_Demo-6C63FF?style=for-the-badge&logo=vercel&logoColor=white)](https://socialhub-sand.vercel.app)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/samki6576/socialhub)
-[![License](https://img.shields.io/badge/License-MIT-FF6584?style=for-the-badge)](LICENSE)
-
-</div>
-
 ---
 
 ## 📖 About
