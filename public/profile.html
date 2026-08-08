@@ -15,7 +15,7 @@
         <a href="/" class="mr-4 hover:underline">Feed</a>
         <a href="/explore.html" class="mr-4 hover:underline">Explore</a>
         <a href="/notifications.html" class="mr-4 hover:underline">🔔</a>
-        <button id="logoutBtn" class="bg-red-500 px-3 py-1 rounded hover:bg-red-600">Logout</button>
+        <button id="logoutBtn" class="btn-secondary" style="background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.2);">Logout</button>
       </div>
     </div>
   </header>
@@ -23,13 +23,13 @@
   <main class="container mx-auto p-4 max-w-2xl">
     <div id="profileContainer" class="bg-white rounded shadow p-6">
       <div class="flex items-center gap-4">
-        <img id="profilePic" src="" alt="Profile" class="w-20 h-20 rounded-full object-cover">
+        <img id="profilePic" src="" alt="Profile" class="profile-avatar">
         <div class="flex-1">
           <h2 id="profileUsername" class="text-2xl font-bold"></h2>
           <p id="profileBio" class="text-gray-600"></p>
           <p id="followStats" class="text-sm text-gray-500"></p>
-          <button id="followBtn" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 hidden">Follow</button>
-          <button id="editProfileBtn" class="mt-2 bg-gray-200 text-gray-800 px-4 py-1 rounded hover:bg-gray-300 hidden">Edit Profile</button>
+          <button id="followBtn" class="mt-2 btn-primary hidden" style="padding:6px 20px;font-size:0.9rem;">Follow</button>
+          <button id="editProfileBtn" class="mt-2 btn-secondary hidden" style="background:rgba(0,0,0,0.05);color:#1a1a2e;padding:6px 20px;font-size:0.9rem;">✏️ Edit Profile</button>
         </div>
       </div>
       <div id="userPosts" class="mt-6 space-y-4"></div>
@@ -58,3 +58,4 @@
   <script src="/js/profile.js"></script>
 </body>
 </html>
+
