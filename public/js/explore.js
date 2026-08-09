@@ -9,20 +9,28 @@ async function loadExplore() {
   const ok = await checkAuth();
   if (!ok) return;
   try {
+    console.log('📡 Fetching explore posts...');
     const res = await fetch(`${API}/posts/explore`, { headers: headers() });
-    if (!res.ok) throw new Error('Failed to load explore posts');
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('❌ Explore fetch error:', res.status, errorText);
+      throw new Error(`Server returned ${res.status}: ${errorText.slice(0, 100)}`);
+    }
     const posts = await res.json();
+    console.log(`✅ Received ${posts.length} explore posts.`);
     renderExplorePosts(posts);
   } catch (err) {
-    showToast('❌ ' + err.message);
+    console.error('❌ Explore load error:', err);
+    showToast('❌ Failed to load explore: ' + err.message);
+    document.getElementById('exploreFeed').innerHTML = `<p class="text-center text-gray-500">Unable to load explore. Please try again later.</p>`;
   }
 }
 
 function renderExplorePosts(posts) {
   const container = document.getElementById('exploreFeed');
   if (!container) return;
-  if (!posts.length) {
-    container.innerHTML = '<p class="text-gray-500 text-center">No posts to explore yet.</p>';
+  if (!posts || posts.length === 0) {
+    container.innerHTML = '<p class="text-gray-500 text-center">No posts to explore yet. Be the first to post!</p>';
     return;
   }
   let html = '';

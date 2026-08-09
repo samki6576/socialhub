@@ -9,7 +9,7 @@ function extractHashtags(text) {
   return text.match(/#[\w\u0590-\u05fe]+/g) || [];
 }
 
-// Feed
+// Feed – posts from followed users + own
 router.get('/feed', protect, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -24,16 +24,19 @@ router.get('/feed', protect, async (req, res) => {
   }
 });
 
-// Explore
+// Explore – all posts (latest first)
 router.get('/explore', protect, async (req, res) => {
   try {
+    console.log('📡 Fetching explore posts...');
     const posts = await Post.find({})
       .populate('user', 'username profilePic')
       .populate('comments')
       .sort({ createdAt: -1 })
       .limit(20);
+    console.log(`✅ Found ${posts.length} posts for explore.`);
     res.json(posts);
   } catch (err) {
+    console.error('❌ Explore error:', err.message);
     res.status(500).json({ message: err.message });
   }
 });
