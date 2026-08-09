@@ -9,7 +9,6 @@ function extractHashtags(text) {
   return text.match(/#[\w\u0590-\u05fe]+/g) || [];
 }
 
-// Feed – posts from followed users + own
 router.get('/feed', protect, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -24,16 +23,16 @@ router.get('/feed', protect, async (req, res) => {
   }
 });
 
-// Explore – all posts (latest first)
+// EXPLORE ROUTE (this is what we need)
 router.get('/explore', protect, async (req, res) => {
   try {
-    console.log('📡 Fetching explore posts...');
+    console.log('📡 Explore route called');
     const posts = await Post.find({})
       .populate('user', 'username profilePic')
       .populate('comments')
       .sort({ createdAt: -1 })
       .limit(20);
-    console.log(`✅ Found ${posts.length} posts for explore.`);
+    console.log(`✅ Found ${posts.length} posts`);
     res.json(posts);
   } catch (err) {
     console.error('❌ Explore error:', err.message);
@@ -41,7 +40,6 @@ router.get('/explore', protect, async (req, res) => {
   }
 });
 
-// Hashtag filter
 router.get('/hashtag/:tag', protect, async (req, res) => {
   try {
     const tag = '#' + req.params.tag;
@@ -55,7 +53,6 @@ router.get('/hashtag/:tag', protect, async (req, res) => {
   }
 });
 
-// Create post
 router.post('/', protect, async (req, res) => {
   try {
     const { content, image } = req.body;
@@ -73,7 +70,6 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
-// Like / unlike
 router.put('/:id/like', protect, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -102,7 +98,6 @@ router.put('/:id/like', protect, async (req, res) => {
   }
 });
 
-// Get single post
 router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
